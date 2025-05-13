@@ -1,0 +1,64 @@
+**Prompt:**
+
+Build a responsive news site that closely replicates the look and feel of Medium.com. The site should include the following UI elements:
+
+### **Landing Page:**
+
+- **Hero Section:**
+    - Full-width background image or clean, bold text header.
+    - Main headline: **“Read What You Want. Pay Only for What You Read.”**
+    - Subheadline: **“Discover premium articles without subscriptions – pay just cents per piece.”**
+    - Prominent call-to-action (CTA) button: **“Start Reading”** or **“Browse Articles”** with a subtle hover effect.
+- **How It Works Section:**
+    - Three or four icon-based steps:
+        1. **Find an Article** – Browse top stories or search for what interests you.
+        2. **Pay in Cents** – Unlock only the articles you want with one click.
+        3. **Instant Access** – Enjoy premium content without subscriptions.
+        4. **Support Writers Directly** – Every payment goes directly to the creators.
+- **Sample Articles Preview:**
+    - Grid or card layout with featured images, titles, short excerpts, and sample prices (e.g., $0.10, $0.25, $0.50 per article).
+    - Dynamic hover effects to indicate articles can be unlocked quickly.
+- **User Testimonials:**
+    - Short, high-impact quotes from hypothetical readers like, **“I love the freedom of paying for only what I read – no more full subscriptions!”**
+- **Call to Action Section:**
+    - Clean, impactful text encouraging sign-up: **“Join thousands of readers. Pay only for what you read.”**
+    - Final CTA button to drive account creation or article browsing.
+- **Footer:**
+    - Links to Privacy Policy, Terms of Service, About, and Social Media.
+
+### **Homepage:**
+
+- Clean, minimalist design with a white background and high-contrast black text.
+- **Header:** Site logo on the left, category links (e.g., Technology, Business, Lifestyle) in the center, and account status (e.g., “Login” / “Profile”) on the right.
+- **Article Feed:** Card-based layout with a mix of featured images, titles, author names, and short excerpts. Cards should stack vertically on mobile.
+- **Search Bar:** Prominently placed above the article feed with a magnifying glass icon.
+- **Footer:** Links to Privacy Policy, Terms of Service, About, and Contact.
+
+### **Article Page:**
+
+- **Header Image:** Full-width image at the top (optional).
+- **Title and Author Info:** Large, bold title with author name, profile picture, and publication date below.
+- **Body Text:** Clean serif font, with line spacing optimized for readability.
+- **Paywall Section:** First few paragraphs visible for free, followed by a subtle paywall prompt like “Read the Full Story for $0.10” with a button.
+- **Comments Section:** Simple text area with reply threads.
+- **Social Share Icons:** Floating bar with links to share the article on Twitter, Facebook, and LinkedIn.
+- **Author Profile Box:** Small card at the bottom linking to more articles by the same author.
+
+### **Login / Profile Modal:**
+
+- login with a sleek, modern modal.
+- Profile view should include recent purchases, history, and logout button.
+
+### **Responsive Design:**
+
+- Mobile-friendly layout with collapsing menus and optimized text scaling.
+- Swipeable article navigation and sticky headers on smaller screens.
+
+### **Animations and Transitions:**
+
+- Smooth hover effects on buttons and cards.
+- Subtle loading animations for article pages.
+
+### **Color Scheme:**
+
+- White background, black text, and light gray accents for a clean, professional look.
