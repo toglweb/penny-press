@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useRoute } from "wouter";
 import { Separator } from "@/components/ui/separator";
-import { RequestFund } from "connect-togl";
+import { ConnectToglButton, RequestFund } from "connect-togl";
 import { useUnlock } from "@/hooks/UnlockContext";
 
 
 const ArticlePage = () => {
-  const buttonRef: any = useRef(null);
-
+  const buttonRef:any = useRef(null);
+  const hiddenToglRef:any = useRef(null)
   const [, params] = useRoute("/article/:id");
   const articleId = params?.id ? parseInt(params.id) : 0;
   const { unlocked, setUnlocked } = useUnlock();
@@ -29,7 +29,7 @@ const ArticlePage = () => {
       setUnlocked(false);
     }
   }, [articleId]);
-  
+
 
   useEffect(() => {
     if (article) {
@@ -94,7 +94,7 @@ const ArticlePage = () => {
     day: 'numeric'
   });
 
- 
+
 
   // const onFundApprove = (data: any) => {
   //   console.log('onFundApprove', data);
@@ -108,9 +108,16 @@ const ArticlePage = () => {
 
   // }
 
-  const handleRequestFunds = async(amount: any) => {
-    const res = await RequestFund(amount)
+  
+  const handleRequestFunds = async (amount: any) => {
+    const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
+    const res = await RequestFund(amount,extensionId);  // Make API call
     console.log('handleRequestFunds res: ', res);
+
+    console.log('buttonRef: ', buttonRef);
+    // if (buttonRef.current) {
+    //   buttonRef.current.click();
+    // }
   };
 
   return (
@@ -184,7 +191,7 @@ const ArticlePage = () => {
 
             >
               Unlock Now
-            </Button>           
+            </Button>
             <p className="mt-3 text-sm text-[#757575]">One-time payment. No subscription required.</p>
           </div>
         )}
