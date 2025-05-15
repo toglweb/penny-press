@@ -1,6 +1,6 @@
 zapp:
 npm run build
-go to chrome//extension in browser , on the developer mode, click on load unpack button, and select build folder which is created after npm run build command
+go to chrome//extension in browser , on the developer mode, click on load unpack button, and select build folder which is created after npm run build command - 
 extension will show on dashboard
 
 connectTogleButton
