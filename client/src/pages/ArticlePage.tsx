@@ -8,6 +8,8 @@ import { useRoute } from "wouter";
 import { Separator } from "@/components/ui/separator";
 import { ConnectToglButton, RequestFund } from "connect-togl";
 import { useUnlock } from "@/hooks/UnlockContext";
+import LoginModal from "@/components/LoginModal";
+import { User } from "@/App";
 
 
 const ArticlePage = () => {
@@ -16,6 +18,15 @@ const ArticlePage = () => {
   const [, params] = useRoute("/article/:id");
   const articleId = params?.id ? parseInt(params.id) : 0;
   const { unlocked, setUnlocked } = useUnlock();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+   const [user, setUser] = useState<User | null>(null);
+  
+    const mockUser: User = {
+      id: 1,
+      name: "Jane Doe",
+      email: "john@gmail.com",
+      avatarUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=100&h=100"
+    };
 
   const { data: article, isLoading } = useQuery<Article>({
     queryKey: [`/api/articles/${articleId}`],
@@ -107,9 +118,30 @@ const ArticlePage = () => {
   //   window.alert("funds declined")
 
   // }
-
+  function getCookie(name:any) {
+    const cookieArr = document.cookie.split(";");
+  
+    // Loop through all cookies to find the one we need
+    for (let i = 0; i < cookieArr.length; i++) {
+      let cookie = cookieArr[i].trim();
+  
+      if (cookie.startsWith(name + "=")) {
+        const cookieValue = cookie.substring(name.length + 1);
+        return JSON.parse(cookieValue); // Parse back to object
+      }
+    }
+    return null; // Return null if the cookie is not found
+  }
+  
   
   const handleRequestFunds = async (amount: any) => {
+    const incomingMessageData = getCookie("incomingMessage");
+    console.log('incomingMessageData: ', incomingMessageData);
+    if(!incomingMessageData?.user_id){
+      setIsLoginModalOpen(true)
+      return
+    }
+    // const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
     const extensionId =  "kbkhmlfogpleldogmkkcbfmpmhhllnmm"
     const res = await RequestFund(amount,extensionId);  // Make API call
     console.log('handleRequestFunds res: ', res);
@@ -119,7 +151,13 @@ const ArticlePage = () => {
     //   buttonRef.current.click();
     // }
   };
-
+  const handleSignIn = (email: string, password: string) => {
+    // In a real app, this would validate credentials with the backend
+    // For now, we'll just create a mock user object
+    
+    setUser(mockUser);
+    setIsLoginModalOpen(false);
+  };
   return (
     <main className="pt-8 pb-16">
       <article className="container mx-auto px-4 max-w-3xl">
@@ -262,6 +300,11 @@ const ArticlePage = () => {
           )}
         </section>
       </article>
+      <LoginModal
+        isOpen={isLoginModalOpen} 
+        onClose={() => setIsLoginModalOpen(false)} 
+        onSignIn={handleSignIn}
+      />
     </main>
   );
 };
