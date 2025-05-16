@@ -47,6 +47,72 @@ const ArticlePage = () => {
       document.title = `${article.title} | PennyPress`;
     }
   }, [article]);
+  
+  const getTokenFromCookie = () => {
+    const cookieName = "token"; // Specify the cookie name
+    const decodedCookie = decodeURIComponent(document.cookie); // Decode cookies for readability
+    const cookiesArray = decodedCookie.split(';'); // Split cookies by semicolon
+  
+    for (let i = 0; i < cookiesArray.length; i++) {
+      let c = cookiesArray[i].trim();  // Trim leading spaces
+  
+      if (c.indexOf(cookieName + "=") === 0) {  // Look for "token=" in each cookie
+        return c.substring(cookieName.length + 1);  // Return value after "token="
+      }
+    }
+    return null; // Return null if the cookie doesn't exist
+  };
+
+  const handleRequestFunds = async (amount: any) => {
+    const incomingMessageData = getCookie("incomingMessage");
+    console.log('incomingMessageData: ', incomingMessageData);
+    if(!incomingMessageData?.user_id){
+      localStorage.setItem("unlock_now",amount)
+      setIsLoginModalOpen(true)
+      return
+    }
+    // const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
+    const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
+    const res = await RequestFund(amount,extensionId);  // Make API call
+    console.log('handleRequestFunds res: ', res);
+
+    console.log('buttonRef: ', buttonRef);
+    // if (buttonRef.current) {
+    //   buttonRef.current.click();
+    // }
+  };
+
+
+  useEffect(() => {
+    // let lastToken = getTokenFromCookie();
+  
+    const interval = setInterval(() => {
+      const currentToken = getTokenFromCookie();
+      const incomingMessageData = getCookie("incomingMessage");
+
+  
+      // if (currentToken !== lastToken) {
+      //   console.log("Token changed:", currentToken);
+      //   lastToken = currentToken;
+  
+        if (currentToken && incomingMessageData?.event_type === "account_connected") {
+          setUser(mockUser);
+          setIsLoginModalOpen(false);
+          const getAmount:any = localStorage.getItem("unlock_now")
+          if(getAmount && getAmount > 0){
+            handleRequestFunds(getAmount)
+            localStorage.removeItem("unlock_now")
+          }
+        } else {
+          setUser(null);
+        }
+      // }else if(incomingMessageData?.event_type !== "account_connected"){
+      //   setUser(null);
+      // }
+    }, 1000); // Check every 1 second
+  
+    return () => clearInterval(interval);
+  }, []);
 
   if (isLoading) {
     return (
@@ -132,25 +198,13 @@ const ArticlePage = () => {
     }
     return null; // Return null if the cookie is not found
   }
-  
-  
-  const handleRequestFunds = async (amount: any) => {
-    const incomingMessageData = getCookie("incomingMessage");
-    console.log('incomingMessageData: ', incomingMessageData);
-    if(!incomingMessageData?.user_id){
-      setIsLoginModalOpen(true)
-      return
-    }
-    // const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
-    const extensionId =  "kbkhmlfogpleldogmkkcbfmpmhhllnmm"
-    const res = await RequestFund(amount,extensionId);  // Make API call
-    console.log('handleRequestFunds res: ', res);
 
-    console.log('buttonRef: ', buttonRef);
-    // if (buttonRef.current) {
-    //   buttonRef.current.click();
-    // }
-  };
+    
+ 
+
+  
+  
+  
   const handleSignIn = (email: string, password: string) => {
     // In a real app, this would validate credentials with the backend
     // For now, we'll just create a mock user object

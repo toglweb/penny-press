@@ -126,8 +126,8 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
               apikey={"41897981789148918494198"}
               companyId={"6811b6dcd402d4e24735eb31"}
               ref={buttonRef}
-                // extensionId="kkojjinggkcdgmhandhckbjbeeiefhgi" // prod
-                extensionId="kbkhmlfogpleldogmkkcbfmpmhhllnmm" // local
+                extensionId="kkojjinggkcdgmhandhckbjbeeiefhgi" // prod
+                // extensionId="kbkhmlfogpleldogmkkcbfmpmhhllnmm" // local
               style={{
                 width: "100%",
                 paddingTop: "0.75rem", // 12px
