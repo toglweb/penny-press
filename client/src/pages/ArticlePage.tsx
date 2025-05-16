@@ -66,13 +66,14 @@ const ArticlePage = () => {
   const handleRequestFunds = async (amount: any) => {
     const incomingMessageData = getCookie("incomingMessage");
     console.log('incomingMessageData: ', incomingMessageData);
-    if(!incomingMessageData?.user_id){
+    if(incomingMessageData?.event_type !== "account_connected"){
       localStorage.setItem("unlock_now",amount)
       setIsLoginModalOpen(true)
       return
     }
+    setIsLoginModalOpen(false)
     // const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
-    const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
+    const extensionId =  "inclhnahcoekfmokfdcmngeckkfjfbea"
     const res = await RequestFund(amount,extensionId);  // Make API call
     console.log('handleRequestFunds res: ', res);
 

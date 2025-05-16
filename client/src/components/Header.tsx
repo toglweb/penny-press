@@ -32,6 +32,19 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
     setIsSearchOpen(!isSearchOpen);
   };
 
+
+  function deleteCookie(name:any) {
+    // Set the cookie with the same name and a past expiration date
+    document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC;`;
+  }
+
+  const handleSignOut = ()=>{
+
+    deleteCookie('incomingMessage');
+    deleteCookie('token')
+  }
+
+
   return (
     <header className="border-b border-[#E6E6E6] sticky top-0 bg-white z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -71,8 +84,8 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>
-              {/* <DropdownMenuContent className="w-56" align="end" forceMount>
-                <div className="flex items-center justify-start gap-2 p-2">
+              <DropdownMenuContent className="w-56" align="end" forceMount>
+                {/* <div className="flex items-center justify-start gap-2 p-2">
                   <div className="flex flex-col space-y-1 leading-none">
                     <p className="font-medium">{user.name}</p>
                     <p className="text-sm text-muted-foreground">{user.email}</p>
@@ -83,12 +96,12 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
                   <User className="mr-2 h-4 w-4" />
                   <span>Profile</span>
                 </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={onSignOut}>
+                <DropdownMenuSeparator /> */}
+                <DropdownMenuItem onClick={handleSignOut}>
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Log out</span>
                 </DropdownMenuItem>
-              </DropdownMenuContent> */}
+              </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             // User is not signed in, show sign in button
