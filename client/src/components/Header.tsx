@@ -42,6 +42,7 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
 
     deleteCookie('incomingMessage');
     deleteCookie('token')
+    window.location.reload()
   }
 
 
