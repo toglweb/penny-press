@@ -9,6 +9,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import LoginModal from "@/components/LoginModal";
 import { UnlockProvider } from "./hooks/UnlockContext";
+import favicon from '../favicon.ico';
+
 
 // Define user type for our mock authentication
 export interface User {
@@ -105,6 +107,14 @@ function App() {
   const ProfileComponent = () => (
     <ProfilePage user={user} onSignOut={handleSignOut} />
   );
+
+
+useEffect(() => {
+  const link = document.createElement('link');
+  link.rel = 'icon';
+  link.href = favicon;
+  document.head.appendChild(link);
+}, []);
 
   return (
     <UnlockProvider>
