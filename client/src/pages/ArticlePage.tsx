@@ -72,8 +72,8 @@ const ArticlePage = () => {
       return
     }
     setIsLoginModalOpen(false)
-    // const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
-    const extensionId =  "inclhnahcoekfmokfdcmngeckkfjfbea"
+    const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
+    // const extensionId =  "kbkhmlfogpleldogmkkcbfmpmhhllnmm"
     const res = await RequestFund(amount,extensionId);  // Make API call
     console.log('handleRequestFunds res: ', res);
 

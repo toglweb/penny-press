@@ -84,7 +84,7 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
           </div>
 
           <div className="mb-6">
-            <Button
+            {/* <Button
               variant="outline"
               className="w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-medium hover:bg-[#F2F2F2] transition mb-3"
             >
@@ -95,7 +95,7 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
               className="w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-medium hover:bg-[#F2F2F2] transition mb-3"
             >
               <i className="fab fa-apple mr-2"></i> Continue with Apple
-            </Button>
+            </Button> */}
             {/* <Button
               variant="outline"
               className="w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-medium hover:bg-[#F2F2F2] transition"
@@ -122,25 +122,25 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
                 onFundReject={onFundReject}
               />
             </Button> */}
-             <ConnectToglButton
+            <ConnectToglButton
               apikey={"41897981789148918494198"}
               companyId={"6811b6dcd402d4e24735eb31"}
               ref={buttonRef}
-                // extensionId="kkojjinggkcdgmhandhckbjbeeiefhgi" // prod
-                extensionId="inclhnahcoekfmokfdcmngeckkfjfbea" // local
+              extensionId="kkojjinggkcdgmhandhckbjbeeiefhgi" // prod
+              // extensionId="kbkhmlfogpleldogmkkcbfmpmhhllnmm" // local
               style={{
                 width: "100%",
-                paddingTop: "0.75rem", // 12px
-                paddingBottom: "0.75rem", // 12px
+                paddingTop: "8px", // 12px
+                paddingBottom: "8px", // 12px
                 paddingLeft: "1rem", // 16px
                 paddingRight: "1rem", // 16px
                 border: "1px solid #d1d5db",
-                borderRadius: "0.5rem", // 8px
+                borderRadius: "40px", // 8px
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 fontWeight: "500",
-                fontSize: "14px",
+                fontSize: "17px",
                 backgroundColor: "transparent",
                 color: "black",
                 transition: "background-color 0.3s ease",
