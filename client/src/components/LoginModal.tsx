@@ -1,14 +1,12 @@
-import { useState, FormEvent, ChangeEvent, useRef } from "react";
-import { Dialog, DialogContent, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { useState, FormEvent, ChangeEvent } from "react";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { X } from "lucide-react";
-import { ConnectToglButton } from "connect-togl";
-import logo from "../assets/togl-icon.svg"
 import { useUnlock } from "@/hooks/UnlockContext";
 import { useRoute } from "wouter";
+import { ConnectToglButton } from "connect-togl";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -17,7 +15,6 @@ interface LoginModalProps {
 }
 
 const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
-  const buttonRef: any = useRef(null);
   const [, params] = useRoute("/article/:id");
   const articleId = params?.id ? parseInt(params.id) : 0;
   const { setUnlocked } = useUnlock();
@@ -125,7 +122,6 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
             <ConnectToglButton
               apikey={"41897981789148918494198"}
               companyId={"6811b6dcd402d4e24735eb31"}
-              ref={buttonRef}
               extensionId="kkojjinggkcdgmhandhckbjbeeiefhgi" // prod
               // extensionId="kbkhmlfogpleldogmkkcbfmpmhhllnmm" // local
               style={{

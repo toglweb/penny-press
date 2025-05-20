@@ -13,8 +13,6 @@ import { User } from "@/App";
 
 
 const ArticlePage = () => {
-  const buttonRef:any = useRef(null);
-  const hiddenToglRef:any = useRef(null)
   const [, params] = useRoute("/article/:id");
   const articleId = params?.id ? parseInt(params.id) : 0;
   const { unlocked, setUnlocked } = useUnlock();
@@ -77,10 +75,6 @@ const ArticlePage = () => {
     const res = await RequestFund(amount,extensionId);  // Make API call
     console.log('handleRequestFunds res: ', res);
 
-    console.log('buttonRef: ', buttonRef);
-    // if (buttonRef.current) {
-    //   buttonRef.current.click();
-    // }
   };
 
 

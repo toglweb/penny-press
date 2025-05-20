@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { Link, useLocation, useRoute } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, X, Menu, User, LogOut } from "lucide-react";
@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User as UserType } from "@/App";
+import { ConnectToglButton } from "connect-togl";
+import { useUnlock } from "@/hooks/UnlockContext";
 
 interface HeaderProps {
   user: UserType | null;
@@ -23,6 +25,9 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [, setLocation] = useLocation();
+    const [, params] = useRoute("/article/:id");
+    const articleId = params?.id ? parseInt(params.id) : 0;
+    const { setUnlocked } = useUnlock();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -45,7 +50,25 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
     window.location.reload()
   }
 
+   const onFundReject = (data: any) => {
+    console.log('onFundReject', data);
+    window.alert("funds declined")
 
+  }
+ const onFundApprove = (data: any) => {
+      console.log('onFundApprove', data);
+    window.alert("Funds approved");
+
+    setUnlocked(true);
+
+    // Get existing list
+    const approvedArticles = JSON.parse(localStorage.getItem("approved_articles") || "[]");
+
+    // Add current articleId if not already in list
+    if (!approvedArticles.includes(articleId)) {
+      approvedArticles.push(articleId);
+      localStorage.setItem("approved_articles", JSON.stringify(approvedArticles));
+    }}
   return (
     <header className="border-b border-[#E6E6E6] sticky top-0 bg-white z-50">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
@@ -105,14 +128,43 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            // User is not signed in, show sign in button
+            <>
+            {/* // User is not signed in, show sign in button
             <Button
               variant="outline"
               className="hidden md:flex py-2 px-4 rounded-full border border-[#1A8917] text-[#1A8917] hover:bg-[#1A8917] hover:text-white transition duration-200"
               onClick={onOpenLoginModal}
             >
               Sign In
-            </Button>
+            </Button> */}
+               <ConnectToglButton
+                          apikey={"41897981789148918494198"}
+                          companyId={"6811b6dcd402d4e24735eb31"}
+                          // ref={buttonRef}
+                          extensionId="kkojjinggkcdgmhandhckbjbeeiefhgi" // prod
+                          // extensionId="kbkhmlfogpleldogmkkcbfmpmhhllnmm" // local
+                          style={{
+                            width: "100%",
+                            paddingTop: "8px", // 12px
+                            paddingBottom: "8px", // 12px
+                            paddingLeft: "1rem", // 16px
+                            paddingRight: "1rem", // 16px
+                            border: "1px solid #d1d5db",
+                            borderRadius: "40px", // 8px
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontWeight: "500",
+                            fontSize: "17px",
+                            backgroundColor: "transparent",
+                            color: "black",
+                            transition: "background-color 0.3s ease",
+                            cursor: "pointer",
+                          }}
+                          onFundApprove={onFundApprove}
+                          onFundReject={onFundReject}
+                        />
+                        </>
           )}
           
           <Button
