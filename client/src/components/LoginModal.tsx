@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { useUnlock } from "@/hooks/UnlockContext";
 import { useRoute } from "wouter";
 import { ConnectToglButton } from "connect-togl";
+import toast from "react-hot-toast";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -50,7 +51,9 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
 
   const onFundApprove = (data: any) => {
     console.log('onFundApprove', data);
-    window.alert("Funds approved");
+    // window.alert("Funds approved");
+    toast.success("Funds approved")
+
 
     setUnlocked(true);
 
@@ -65,7 +68,8 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
   };
   const onFundReject = (data: any) => {
     console.log('onFundReject', data);
-    window.alert("funds declined")
+    toast.error("funds declined")
+
 
   }
 

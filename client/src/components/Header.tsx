@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User as UserType } from "@/App";
 import { ConnectToglButton } from "connect-togl";
 import { useUnlock } from "@/hooks/UnlockContext";
+import toast from "react-hot-toast";
 
 interface HeaderProps {
   user: UserType | null;
@@ -52,12 +53,14 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
 
    const onFundReject = (data: any) => {
     console.log('onFundReject', data);
-    window.alert("funds declined")
+    // window.alert("funds declined")
+    toast.error("funds declined")
 
   }
  const onFundApprove = (data: any) => {
       console.log('onFundApprove', data);
-    window.alert("Funds approved");
+    // window.alert("Funds approved");
+    toast.success("Funds approved")
 
     setUnlocked(true);
 
