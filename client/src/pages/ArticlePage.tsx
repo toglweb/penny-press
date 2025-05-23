@@ -5,11 +5,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useRoute } from "wouter";
-import { Separator } from "@/components/ui/separator";
-import { ConnectToglButton, RequestFund } from "connect-togl";
+import {  RequestFund } from "connect-togl";
 import { useUnlock } from "@/hooks/UnlockContext";
 import LoginModal from "@/components/LoginModal";
 import { User } from "@/App";
+import UnlockNowModal from "@/components/unlockNowModal";
 
 
 const ArticlePage = () => {
@@ -17,7 +17,9 @@ const ArticlePage = () => {
   const articleId = params?.id ? parseInt(params.id) : 0;
   const { unlocked, setUnlocked } = useUnlock();
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [UnlockNowModalOpen, setUnlockNowModalOpen] = useState(false);
    const [user, setUser] = useState<User | null>(null);
+   
   
     const mockUser: User = {
       id: 1,
@@ -64,14 +66,15 @@ const ArticlePage = () => {
   const handleRequestFunds = async (amount: any) => {
     const incomingMessageData = getCookie("incomingMessage");
     console.log('incomingMessageData: ', incomingMessageData);
+    setUnlockNowModalOpen(false)
     if(incomingMessageData?.event_type !== "account_connected"){
       localStorage.setItem("unlock_now",amount)
       setIsLoginModalOpen(true)
       return
     }
     setIsLoginModalOpen(false)
-    const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
-    // const extensionId =  "kbkhmlfogpleldogmkkcbfmpmhhllnmm"
+    // const extensionId =  "kkojjinggkcdgmhandhckbjbeeiefhgi"
+    const extensionId =  "kbkhmlfogpleldogmkkcbfmpmhhllnmm"
     const res = await RequestFund(amount,extensionId);  // Make API call
     console.log('handleRequestFunds res: ', res);
 
@@ -274,7 +277,7 @@ const ArticlePage = () => {
             <p className="text-[#757575] mb-4">Unlock the full article to learn more about this topic and gain valuable insights.</p>
             <Button
               className="bg-[#1A8917] hover:bg-opacity-90 ml-2 text-white font-bold py-2 px-6 rounded-full transition duration-200"
-              onClick={() => handleRequestFunds(price.toFixed(2))}
+              onClick={() => setUnlockNowModalOpen(true)}
 
             >
               Unlock Now
@@ -353,6 +356,11 @@ const ArticlePage = () => {
         isOpen={isLoginModalOpen} 
         onClose={() => setIsLoginModalOpen(false)} 
         onSignIn={handleSignIn}
+      />
+      <UnlockNowModal
+        isOpen={UnlockNowModalOpen} 
+        onClose={() => setUnlockNowModalOpen(false)} 
+        handleRequestFunds={()=>handleRequestFunds(price)}
       />
     </main>
   );

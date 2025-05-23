@@ -132,14 +132,13 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
             </DropdownMenu>
           ) : (
             <>
-            {/* // User is not signed in, show sign in button
             <Button
               variant="outline"
               className="hidden md:flex py-2 px-4 rounded-full border border-[#1A8917] text-[#1A8917] hover:bg-[#1A8917] hover:text-white transition duration-200"
               onClick={onOpenLoginModal}
             >
               Sign In
-            </Button> */}
+            </Button>
                <ConnectToglButton
                           apikey={"41897981789148918494198"}
                           companyId={"6811b6dcd402d4e24735eb31"}
@@ -154,7 +153,7 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
                             paddingRight: "1rem", // 16px
                             border: "1px solid #d1d5db",
                             borderRadius: "40px", // 8px
-                            display: "flex",
+                            display: "none",
                             alignItems: "center",
                             justifyContent: "center",
                             fontWeight: "500",

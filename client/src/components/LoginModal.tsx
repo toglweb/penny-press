@@ -52,7 +52,7 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
   const onFundApprove = (data: any) => {
     console.log('onFundApprove', data);
     // window.alert("Funds approved");
-    toast.success("Funds approved")
+    // toast.success("Funds approved")
 
 
     setUnlocked(true);
@@ -68,35 +68,80 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
   };
   const onFundReject = (data: any) => {
     console.log('onFundReject', data);
-    toast.error("funds declined")
+    // toast.error("funds declined")
 
 
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white rounded-lg max-w-md w-full mx-4 animate-fade-in p-0">
+      <DialogContent className="bg-white rounded-lg max-w-md w-full mx-4 animate-fade-in p-4">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <DialogTitle className="text-2xl font-bold">{isSignUp ? "Sign Up" : "Sign In"}</DialogTitle>
+            <DialogTitle className="text-2xl font-bold mx-auto mt-1">{isSignUp ? "Sign Up" : "Create account"}</DialogTitle>
             {/* <DialogClose className="text-[#757575] hover:text-black">
               <X className="h-5 w-5" />
             </DialogClose> */}
           </div>
 
+          <div>
+
+            <form onSubmit={handleSubmit}>
+              {isSignUp && (
+                <div className="mb-4">
+                  <Label htmlFor="name" className="block text-sm font-medium mb-2">Full Name</Label>
+                  <Input
+                    type="text"
+                    id="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full py-2 px-4 border border-[#E6E6E6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A8917]"
+                  />
+                </div>
+              )}
+
+              <div className="mb-4">
+                <Label htmlFor="email" className="block text-sm font-semibold mb-2">Email</Label>
+                <Input
+                  type="email"
+                  id="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full py-2 px-4 border border-[#E6E6E6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A8917]"
+                />
+              </div>
+
+              <div className="mb-6">
+                <Label htmlFor="password" className="block text-sm font-semibold mb-2">Password</Label>
+                <Input
+                  type="password"
+                  id="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full py-2 px-4 border border-[#E6E6E6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A8917]"
+                />
+              </div>
+              <div className=" flex items-center w-full my-6">
+                <Separator className="w-[44.5%]" />
+                <span className="flex-shrink mx-4 text-[#757575] text-sm">OR</span>
+                <Separator className="w-[44.5%]" />
+              </div>
+            </form>
+          </div>
+
           <div className="mb-6">
-            {/* <Button
+            <Button
               variant="outline"
-              className="w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-medium hover:bg-[#F2F2F2] transition mb-3"
+              className="text-[16px] w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-semibold hover:bg-[#F2F2F2] transition mb-3"
             >
-              <i className="fab fa-google mr-2"></i> Continue with Google
+              Sign Up with<i className="fab fa-google"></i>Google
             </Button>
             <Button
               variant="outline"
-              className="w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-medium hover:bg-[#F2F2F2] transition mb-3"
+              className="text-[16px] w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-semibold hover:bg-[#F2F2F2] transition mb-3"
             >
-              <i className="fab fa-apple mr-2"></i> Continue with Apple
-            </Button> */}
+               Sign Up with<i className="fab fa-apple text-lg"></i>Apple
+            </Button>
             {/* <Button
               variant="outline"
               className="w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-medium hover:bg-[#F2F2F2] transition"
@@ -135,12 +180,15 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
                 paddingLeft: "1rem", // 16px
                 paddingRight: "1rem", // 16px
                 border: "1px solid #d1d5db",
-                borderRadius: "40px", // 8px
+                borderRadius: "10px", // 8px
                 display: "flex",
+                flexDirection: "column",
+                gap: "5px",
                 alignItems: "center",
                 justifyContent: "center",
-                fontWeight: "500",
-                fontSize: "17px",
+                fontWeight: "600",
+                fontSize: "16px",
+                
                 backgroundColor: "transparent",
                 color: "black",
                 transition: "background-color 0.3s ease",
@@ -150,61 +198,14 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
               onFundReject={onFundReject}
             />
           </div>
+          <Button
+            type="submit"
+            className="w-full bg-black hover:bg-opacity-90 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+          >
+            {/* {isSignUp ? "Sign Up" : "Sign In"} */}
+            Create Account
+          </Button>
 
-          <div className=" flex items-center w-full my-6">
-            <Separator className="w-[44.5%]" />
-            <span className="flex-shrink mx-4 text-[#757575] text-sm">or</span>
-            <Separator className="w-[44.5%]" />
-          </div>
-
-          <form onSubmit={handleSubmit}>
-            {isSignUp && (
-              <div className="mb-4">
-                <Label htmlFor="name" className="block text-sm font-medium mb-2">Full Name</Label>
-                <Input
-                  type="text"
-                  id="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="w-full py-2 px-4 border border-[#E6E6E6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A8917]"
-                />
-              </div>
-            )}
-
-            <div className="mb-4">
-              <Label htmlFor="email" className="block text-sm font-medium mb-2">Email</Label>
-              <Input
-                type="email"
-                id="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full py-2 px-4 border border-[#E6E6E6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A8917]"
-              />
-            </div>
-
-            <div className="mb-6">
-              <Label htmlFor="password" className="block text-sm font-medium mb-2">Password</Label>
-              <Input
-                type="password"
-                id="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full py-2 px-4 border border-[#E6E6E6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1A8917]"
-              />
-              {!isSignUp && (
-                <div className="mt-1 text-right">
-                  <a href="#" className="text-sm text-[#1A8917] hover:underline">Forgot password?</a>
-                </div>
-              )}
-            </div>
-
-            <Button
-              type="submit"
-              className="w-full bg-[#1A8917] hover:bg-opacity-90 text-white font-bold py-3 px-4 rounded-full transition duration-200"
-            >
-              {isSignUp ? "Sign Up" : "Sign In"}
-            </Button>
-          </form>
 
           <div className="mt-6 text-center text-sm text-[#757575]">
             {isSignUp ? (
