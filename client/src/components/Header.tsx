@@ -145,24 +145,24 @@ const Header = ({ user, onOpenLoginModal, onSignOut }: HeaderProps) => {
                           // ref={buttonRef}
                           extensionId="kkojjinggkcdgmhandhckbjbeeiefhgi" // prod
                           // extensionId="kbkhmlfogpleldogmkkcbfmpmhhllnmm" // local
-                          style={{
-                            width: "100%",
-                            paddingTop: "8px", // 12px
-                            paddingBottom: "8px", // 12px
-                            paddingLeft: "1rem", // 16px
-                            paddingRight: "1rem", // 16px
-                            border: "1px solid #d1d5db",
-                            borderRadius: "40px", // 8px
-                            display: "none",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontWeight: "500",
-                            fontSize: "17px",
-                            backgroundColor: "transparent",
-                            color: "black",
-                            transition: "background-color 0.3s ease",
-                            cursor: "pointer",
-                          }}
+                          // style={{
+                          //   width: "100%",
+                          //   paddingTop: "8px", // 12px
+                          //   paddingBottom: "8px", // 12px
+                          //   paddingLeft: "1rem", // 16px
+                          //   paddingRight: "1rem", // 16px
+                          //   border: "1px solid #d1d5db",
+                          //   borderRadius: "40px", // 8px
+                          //   display: "none",
+                          //   alignItems: "center",
+                          //   justifyContent: "center",
+                          //   fontWeight: "500",
+                          //   fontSize: "17px",
+                          //   backgroundColor: "transparent",
+                          //   color: "black",
+                          //   transition: "background-color 0.3s ease",
+                          //   cursor: "pointer",
+                          // }}
                           onFundApprove={onFundApprove}
                           onFundReject={onFundReject}
                         />

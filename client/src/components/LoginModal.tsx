@@ -8,6 +8,9 @@ import { useUnlock } from "@/hooks/UnlockContext";
 import { useRoute } from "wouter";
 import { ConnectToglButton } from "connect-togl";
 import toast from "react-hot-toast";
+import google from '../assets/Google.svg';
+import facebook from '../assets/Facebook.svg';
+import togl from '../assets/togl-icon.svg';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -75,7 +78,7 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-white rounded-lg max-w-md w-full mx-4 animate-fade-in p-4">
+      <DialogContent className="bg-[#FBFBFB] rounded-[24px] max-w-md w-full mx-4 animate-fade-in p-4 pb-0">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <DialogTitle className="text-2xl font-bold mx-auto mt-1">{isSignUp ? "Sign Up" : "Create account"}</DialogTitle>
@@ -132,84 +135,56 @@ const LoginModal = ({ isOpen, onClose, onSignIn }: LoginModalProps) => {
           <div className="mb-6">
             <Button
               variant="outline"
-              className="text-[16px] w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-semibold hover:bg-[#F2F2F2] transition mb-3"
+              className="relative text-[16px] w-full py-3 h-[48px] px-4 border border-gray-300 rounded-lg flex items-center justify-center font-semibold hover:bg-[#F2F2F2] transition mb-3"
             >
-              Sign Up with<i className="fab fa-google"></i>Google
+              <img src={google} className="absolute top-1/2 left-5 transform -translate-y-1/2" />
+              Sign Up with Google
             </Button>
             <Button
               variant="outline"
-              className="text-[16px] w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-semibold hover:bg-[#F2F2F2] transition mb-3"
+              className=" relative text-[16px] w-full py-3 px-4 h-[48px] border border-gray-300 rounded-lg flex items-center justify-center font-semibold hover:bg-[#F2F2F2] transition mb-3"
             >
-               Sign Up with<i className="fab fa-apple text-lg"></i>Apple
+              <img src={facebook} className="absolute top-1/2 left-5 transform -translate-y-1/2" /> Sign Up with Facebook
             </Button>
-            {/* <Button
-              variant="outline"
-              className="w-full py-3 px-4 border border-gray-300 rounded-lg flex items-center justify-center font-medium hover:bg-[#F2F2F2] transition"
-            >
-              <img src={logo} alt="" className="w-4 h-4 mr-2" />
-              <ConnectToglButton
-                apikey={"41897981789148918494198"}
-                companyId={"6811b6dcd402d4e24735eb31"}
-                ref={buttonRef}
-                extensionId="kbkhmlfogpleldogmkkcbfmpmhhllnmm"
-                style={{
-                  backgroundColor: "transparent",
-                  // width:"100%",
-                  color: "black",
-                  // padding: "9px 24px",
-                  // borderRadius: "8px",
-                  // marginTop: "20px",
-                  fontWeight: 500,
-                  fontSize: "14px",
-                  // marginInline:"10px",
-                  // border:"1px solid #d1d5db"
-                }}
-                onFundApprove={onFundApprove}
-                onFundReject={onFundReject}
-              />
-            </Button> */}
+
             <ConnectToglButton
               apikey={"41897981789148918494198"}
               companyId={"6811b6dcd402d4e24735eb31"}
               extensionId="kkojjinggkcdgmhandhckbjbeeiefhgi" // prod
               // extensionId="kbkhmlfogpleldogmkkcbfmpmhhllnmm" // local
-              style={{
-                width: "100%",
-                paddingTop: "8px", // 12px
-                paddingBottom: "8px", // 12px
-                paddingLeft: "1rem", // 16px
-                paddingRight: "1rem", // 16px
-                border: "1px solid #d1d5db",
-                borderRadius: "10px", // 8px
-                display: "flex",
-                flexDirection: "column",
-                gap: "5px",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: "600",
-                fontSize: "16px",
-                
-                backgroundColor: "transparent",
-                color: "black",
-                transition: "background-color 0.3s ease",
-                cursor: "pointer",
-              }}
+
               onFundApprove={onFundApprove}
               onFundReject={onFundReject}
-            />
+            >
+              <Button
+                variant="outline"
+                className="relative w-full py-3 h-[75px] px-4 border border-gray-300 rounded-lg flex items-center justify-center font-semibold hover:bg-[#F2F2F2] transition flex-col text-center"
+              >
+                <img
+                  src={togl}
+                  alt="Togl Logo"
+                  className="absolute top-6 left-5 transform -translate-y-1/2 w-[26px] h-[16px]"
+                />
+                <div>
+                  <span className="block font-semibold text-base mb-2">Sign up with Togl</span>
+                  <span className="text-sm font-normal text-[#4A4A4A]">The most secure way to use the internet</span>
+                </div>
+              </Button>
+
+            </ConnectToglButton>
           </div>
           <Button
             type="submit"
-            className="w-full bg-black hover:bg-opacity-90 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+            className="w-full text-base bg-black hover:bg-opacity-90 text-white font-bold py-6 px-4 rounded-lg transition duration-200"
           >
             {/* {isSignUp ? "Sign Up" : "Sign In"} */}
             Create Account
           </Button>
 
 
-          <div className="mt-6 text-center text-sm text-[#757575]">
+          <div className="mt-3 text-center text-sm text-[#757575]">
             {isSignUp ? (
-              <>Already have an account? <Button variant="link" className="text-[#1A8917] hover:underline p-0" onClick={() => setIsSignUp(false)}>Sign in</Button></>
+              <>Already have an account?  <Button variant="link" className="text-[#1A8917] hover:underline p-0" onClick={() => setIsSignUp(false)}>Log in</Button></>
             ) : (
               <>Don't have an account? <Button variant="link" className="text-[#1A8917] hover:underline p-0" onClick={() => setIsSignUp(true)}>Sign up</Button></>
             )}
